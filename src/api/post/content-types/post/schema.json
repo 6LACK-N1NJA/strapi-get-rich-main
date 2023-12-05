@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "Post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Body": {
+      "type": "blocks"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Date": {
+      "type": "date"
+    },
+    "topic": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::topic.topic"
+    }
+  }
+}
