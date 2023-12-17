@@ -689,10 +689,12 @@ export interface ApiPostPost extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Body: Attribute.Blocks;
-    Title: Attribute.String;
-    Date: Attribute.Date;
+    body: Attribute.Blocks;
+    title: Attribute.String;
+    date: Attribute.Date;
     topic: Attribute.Relation<'api::post.post', 'oneToOne', 'api::topic.topic'>;
+    seo: Attribute.Component<'shared.seo', true>;
+    slug: Attribute.UID<'api::post.post', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -709,13 +711,16 @@ export interface ApiTopicTopic extends Schema.CollectionType {
     singularName: 'topic';
     pluralName: 'topics';
     displayName: 'Topic';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String;
-    Description: Attribute.Text;
+    title: Attribute.String;
+    description: Attribute.Text;
+    seo: Attribute.Component<'shared.seo', true>;
+    slug: Attribute.UID<'api::topic.topic', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

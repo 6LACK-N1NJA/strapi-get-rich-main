@@ -12,19 +12,28 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Body": {
+    "body": {
       "type": "blocks"
     },
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Date": {
+    "date": {
       "type": "date"
     },
     "topic": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::topic.topic"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }
