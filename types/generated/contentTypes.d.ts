@@ -696,6 +696,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     seo: Attribute.Component<'shared.seo', true>;
     slug: Attribute.UID<'api::post.post', 'title'>;
     cover: Attribute.Media;
+    noCoverInText: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
