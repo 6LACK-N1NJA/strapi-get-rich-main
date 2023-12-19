@@ -695,6 +695,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     topic: Attribute.Relation<'api::post.post', 'oneToOne', 'api::topic.topic'>;
     seo: Attribute.Component<'shared.seo', true>;
     slug: Attribute.UID<'api::post.post', 'title'>;
+    cover: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
