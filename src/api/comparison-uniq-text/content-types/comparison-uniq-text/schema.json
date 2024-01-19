@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comparison_uniq_texts",
+  "info": {
+    "singularName": "comparison-uniq-text",
+    "pluralName": "comparison-uniq-texts",
+    "displayName": "ComparisonUniqTexts",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mainDescription": {
+      "type": "text"
+    },
+    "selectedProductsDescription": {
+      "type": "text"
+    },
+    "rankingDescription": {
+      "type": "text"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

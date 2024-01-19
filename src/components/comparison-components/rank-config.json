@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_comparison_components_rank_configs",
+  "info": {
+    "displayName": "RankConfig"
+  },
+  "options": {},
+  "attributes": {
+    "rankedFieldName": {
+      "type": "string"
+    },
+    "tiltle": {
+      "type": "string"
+    },
+    "rankingRule": {
+      "type": "enumeration",
+      "enum": [
+        "asc, desc"
+      ]
+    }
+  }
+}

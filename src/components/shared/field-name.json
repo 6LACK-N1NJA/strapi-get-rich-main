@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_shared_field_names",
+  "info": {
+    "displayName": "fieldName"
+  },
+  "options": {},
+  "attributes": {
+    "fieldName": {
+      "type": "string"
+    }
+  }
+}

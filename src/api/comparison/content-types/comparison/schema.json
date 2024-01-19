@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comparisons",
+  "info": {
+    "singularName": "comparison",
+    "pluralName": "comparisons",
+    "displayName": "Comparison",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "productCardConfig": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::comparison-product-card-config.comparison-product-card-config"
+    },
+    "defaultTexts": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::comparison-uniq-text.comparison-uniq-text"
+    },
+    "customTexts": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::comparison-uniq-text.comparison-uniq-text"
+    },
+    "emoji": {
+      "type": "string"
+    },
+    "filtersList": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::comparison-filters-config.comparison-filters-config"
+    },
+    "rankingConfig": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ranking.ranking"
+    },
+    "selectedFields": {
+      "displayName": "SelectedFilters",
+      "type": "component",
+      "repeatable": true,
+      "component": "comparison-components.selected-filters"
+    }
+  }
+}

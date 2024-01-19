@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comparison_filters_configs",
+  "info": {
+    "singularName": "comparison-filters-config",
+    "pluralName": "comparison-filters-configs",
+    "displayName": "ComparisonFiltersConfig",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "filtersList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comparison-components.filter-config"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

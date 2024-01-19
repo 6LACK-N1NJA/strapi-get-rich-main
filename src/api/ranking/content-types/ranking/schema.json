@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rankings",
+  "info": {
+    "singularName": "ranking",
+    "pluralName": "rankings",
+    "displayName": "ComparisonRanking",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "configsList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "comparison-components.rank-config"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

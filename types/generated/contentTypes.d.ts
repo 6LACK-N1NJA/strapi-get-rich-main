@@ -482,6 +482,97 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   };
 }
 
+export interface PluginContentReleasesRelease extends Schema.CollectionType {
+  collectionName: 'strapi_releases';
+  info: {
+    singularName: 'release';
+    pluralName: 'releases';
+    displayName: 'Release';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    releasedAt: Attribute.DateTime;
+    actions: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToMany',
+      'plugin::content-releases.release-action'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginContentReleasesReleaseAction
+  extends Schema.CollectionType {
+  collectionName: 'strapi_release_actions';
+  info: {
+    singularName: 'release-action';
+    pluralName: 'release-actions';
+    displayName: 'Release Action';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required;
+    entry: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'morphToOne'
+    >;
+    contentType: Attribute.String & Attribute.Required;
+    release: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'manyToOne',
+      'plugin::content-releases.release'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -677,6 +768,208 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiArticleArticle extends Schema.CollectionType {
+  collectionName: 'articles';
+  info: {
+    singularName: 'article';
+    pluralName: 'articles';
+    displayName: 'Article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    slug: Attribute.UID<'api::article.article', 'title'>;
+    title: Attribute.String;
+    text: Attribute.Blocks;
+    seo: Attribute.Component<'shared.seo'>;
+    cover: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiComparisonComparison extends Schema.CollectionType {
+  collectionName: 'comparisons';
+  info: {
+    singularName: 'comparison';
+    pluralName: 'comparisons';
+    displayName: 'Comparison';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    slug: Attribute.UID<'api::comparison.comparison', 'title'>;
+    productCardConfig: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToOne',
+      'api::comparison-product-card-config.comparison-product-card-config'
+    >;
+    defaultTexts: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToOne',
+      'api::comparison-uniq-text.comparison-uniq-text'
+    >;
+    customTexts: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToOne',
+      'api::comparison-uniq-text.comparison-uniq-text'
+    >;
+    emoji: Attribute.String;
+    filtersList: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToOne',
+      'api::comparison-filters-config.comparison-filters-config'
+    >;
+    rankingConfig: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToMany',
+      'api::ranking.ranking'
+    >;
+    selectedFields: Attribute.Component<
+      'comparison-components.selected-filters',
+      true
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiComparisonFiltersConfigComparisonFiltersConfig
+  extends Schema.CollectionType {
+  collectionName: 'comparison_filters_configs';
+  info: {
+    singularName: 'comparison-filters-config';
+    pluralName: 'comparison-filters-configs';
+    displayName: 'ComparisonFiltersConfig';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    filtersList: Attribute.Component<
+      'comparison-components.filter-config',
+      true
+    >;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comparison-filters-config.comparison-filters-config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comparison-filters-config.comparison-filters-config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiComparisonProductCardConfigComparisonProductCardConfig
+  extends Schema.CollectionType {
+  collectionName: 'comparison_product_card_configs';
+  info: {
+    singularName: 'comparison-product-card-config';
+    pluralName: 'comparison-product-card-configs';
+    displayName: 'ComparisonProductCardConfig';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    customPieCharts: Attribute.Component<'shared.field-name', true>;
+    customParameters: Attribute.Component<'shared.field-name', true>;
+    customDottedCharts: Attribute.Component<'shared.field-name', true>;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comparison-product-card-config.comparison-product-card-config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comparison-product-card-config.comparison-product-card-config',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiComparisonUniqTextComparisonUniqText
+  extends Schema.CollectionType {
+  collectionName: 'comparison_uniq_texts';
+  info: {
+    singularName: 'comparison-uniq-text';
+    pluralName: 'comparison-uniq-texts';
+    displayName: 'ComparisonUniqTexts';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    mainDescription: Attribute.Text;
+    selectedProductsDescription: Attribute.Text;
+    rankingDescription: Attribute.Text;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::comparison-uniq-text.comparison-uniq-text',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::comparison-uniq-text.comparison-uniq-text',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Schema.CollectionType {
   collectionName: 'posts';
   info: {
@@ -703,6 +996,38 @@ export interface ApiPostPost extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRankingRanking extends Schema.CollectionType {
+  collectionName: 'rankings';
+  info: {
+    singularName: 'ranking';
+    pluralName: 'rankings';
+    displayName: 'ComparisonRanking';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    configsList: Attribute.Component<'comparison-components.rank-config', true>;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ranking.ranking',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ranking.ranking',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -753,11 +1078,19 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
+      'plugin::content-releases.release': PluginContentReleasesRelease;
+      'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::article.article': ApiArticleArticle;
+      'api::comparison.comparison': ApiComparisonComparison;
+      'api::comparison-filters-config.comparison-filters-config': ApiComparisonFiltersConfigComparisonFiltersConfig;
+      'api::comparison-product-card-config.comparison-product-card-config': ApiComparisonProductCardConfigComparisonProductCardConfig;
+      'api::comparison-uniq-text.comparison-uniq-text': ApiComparisonUniqTextComparisonUniqText;
       'api::post.post': ApiPostPost;
+      'api::ranking.ranking': ApiRankingRanking;
       'api::topic.topic': ApiTopicTopic;
     }
   }
