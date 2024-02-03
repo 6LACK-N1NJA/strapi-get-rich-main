@@ -23,6 +23,11 @@
     },
     "name": {
       "type": "string"
+    },
+    "mainText": {
+      "type": "text",
+      "maxLength": 350,
+      "minLength": 200
     }
   }
 }

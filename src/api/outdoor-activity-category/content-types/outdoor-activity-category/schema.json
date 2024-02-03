@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "outdoor_activity_categories",
+  "info": {
+    "singularName": "outdoor-activity-category",
+    "pluralName": "outdoor-activity-categories",
+    "displayName": "OutdoorActivityCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "info": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::article.article",
+      "mappedBy": "outdoor_activity_categories"
+    },
+    "comparisons": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::comparison.comparison",
+      "mappedBy": "outdoor_activity_categories"
+    }
+  }
+}

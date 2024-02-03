@@ -37,11 +37,6 @@
     "emoji": {
       "type": "string"
     },
-    "filtersList": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::comparison-filters-config.comparison-filters-config"
-    },
     "rankingConfig": {
       "type": "relation",
       "relation": "oneToMany",
@@ -52,6 +47,25 @@
       "type": "component",
       "repeatable": true,
       "component": "comparison-components.selected-filters"
+    },
+    "dataKey": {
+      "type": "string"
+    },
+    "filtersList": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comparison-filters-config.comparison-filters-config"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "outdoor_activity_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::outdoor-activity-category.outdoor-activity-category",
+      "inversedBy": "comparisons"
     }
   }
 }

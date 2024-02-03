@@ -4,10 +4,12 @@ export interface ComparisonComponentsFilterConfig extends Schema.Component {
   collectionName: 'components_comparison_components_filter_configs';
   info: {
     displayName: 'filterConfig';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     filterFieldName: Attribute.String;
+    filterValues: Attribute.String;
   };
 }
 
@@ -15,11 +17,12 @@ export interface ComparisonComponentsRankConfig extends Schema.Component {
   collectionName: 'components_comparison_components_rank_configs';
   info: {
     displayName: 'RankConfig';
+    description: '';
   };
   attributes: {
     rankedFieldName: Attribute.String;
-    tiltle: Attribute.String;
-    rankingRule: Attribute.Enumeration<['asc, desc']>;
+    title: Attribute.String;
+    rankingRule: Attribute.Enumeration<['asc', 'desc']>;
   };
 }
 
@@ -27,10 +30,11 @@ export interface ComparisonComponentsSelectedFilters extends Schema.Component {
   collectionName: 'components_comparison_components_selected_filters';
   info: {
     displayName: 'SelectedFilters';
+    description: '';
   };
   attributes: {
     fieldName: Attribute.String;
-    selectedValues: Attribute.Component<'shared.field-name', true>;
+    selectedValue: Attribute.String;
   };
 }
 
@@ -38,9 +42,12 @@ export interface SharedFieldName extends Schema.Component {
   collectionName: 'components_shared_field_names';
   info: {
     displayName: 'fieldName';
+    description: '';
   };
   attributes: {
     fieldName: Attribute.String;
+    title: Attribute.String;
+    isBoolean: Attribute.Boolean;
   };
 }
 

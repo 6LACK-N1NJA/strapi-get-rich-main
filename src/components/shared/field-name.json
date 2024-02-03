@@ -1,12 +1,19 @@
 {
   "collectionName": "components_shared_field_names",
   "info": {
-    "displayName": "fieldName"
+    "displayName": "fieldName",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "fieldName": {
       "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "isBoolean": {
+      "type": "boolean"
     }
   }
 }

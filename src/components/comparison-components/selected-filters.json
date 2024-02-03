@@ -1,17 +1,16 @@
 {
   "collectionName": "components_comparison_components_selected_filters",
   "info": {
-    "displayName": "SelectedFilters"
+    "displayName": "SelectedFilters",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "fieldName": {
       "type": "string"
     },
-    "selectedValues": {
-      "type": "component",
-      "repeatable": true,
-      "component": "shared.field-name"
+    "selectedValue": {
+      "type": "string"
     }
   }
 }

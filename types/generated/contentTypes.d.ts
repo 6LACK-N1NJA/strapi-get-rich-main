@@ -774,6 +774,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     singularName: 'article';
     pluralName: 'articles';
     displayName: 'Article';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -784,6 +785,13 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     text: Attribute.Blocks;
     seo: Attribute.Component<'shared.seo'>;
     cover: Attribute.Media;
+    isMain: Attribute.Boolean;
+    outdoor_activity_categories: Attribute.Relation<
+      'api::article.article',
+      'manyToMany',
+      'api::outdoor-activity-category.outdoor-activity-category'
+    >;
+    snippet: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -832,11 +840,6 @@ export interface ApiComparisonComparison extends Schema.CollectionType {
       'api::comparison-uniq-text.comparison-uniq-text'
     >;
     emoji: Attribute.String;
-    filtersList: Attribute.Relation<
-      'api::comparison.comparison',
-      'oneToOne',
-      'api::comparison-filters-config.comparison-filters-config'
-    >;
     rankingConfig: Attribute.Relation<
       'api::comparison.comparison',
       'oneToMany',
@@ -845,6 +848,18 @@ export interface ApiComparisonComparison extends Schema.CollectionType {
     selectedFields: Attribute.Component<
       'comparison-components.selected-filters',
       true
+    >;
+    dataKey: Attribute.String;
+    filtersList: Attribute.Relation<
+      'api::comparison.comparison',
+      'oneToMany',
+      'api::comparison-filters-config.comparison-filters-config'
+    >;
+    seo: Attribute.Component<'shared.seo'>;
+    outdoor_activity_categories: Attribute.Relation<
+      'api::comparison.comparison',
+      'manyToMany',
+      'api::outdoor-activity-category.outdoor-activity-category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -952,6 +967,11 @@ export interface ApiComparisonUniqTextComparisonUniqText
     selectedProductsDescription: Attribute.Text;
     rankingDescription: Attribute.Text;
     name: Attribute.String;
+    mainText: Attribute.Text &
+      Attribute.SetMinMaxLength<{
+        minLength: 200;
+        maxLength: 350;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -963,6 +983,53 @@ export interface ApiComparisonUniqTextComparisonUniqText
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::comparison-uniq-text.comparison-uniq-text',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOutdoorActivityCategoryOutdoorActivityCategory
+  extends Schema.CollectionType {
+  collectionName: 'outdoor_activity_categories';
+  info: {
+    singularName: 'outdoor-activity-category';
+    pluralName: 'outdoor-activity-categories';
+    displayName: 'OutdoorActivityCategory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    info: Attribute.Text;
+    slug: Attribute.UID<
+      'api::outdoor-activity-category.outdoor-activity-category',
+      'title'
+    >;
+    seo: Attribute.Component<'shared.seo'>;
+    articles: Attribute.Relation<
+      'api::outdoor-activity-category.outdoor-activity-category',
+      'manyToMany',
+      'api::article.article'
+    >;
+    comparisons: Attribute.Relation<
+      'api::outdoor-activity-category.outdoor-activity-category',
+      'manyToMany',
+      'api::comparison.comparison'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::outdoor-activity-category.outdoor-activity-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::outdoor-activity-category.outdoor-activity-category',
       'oneToOne',
       'admin::user'
     > &
@@ -1089,6 +1156,7 @@ declare module '@strapi/types' {
       'api::comparison-filters-config.comparison-filters-config': ApiComparisonFiltersConfigComparisonFiltersConfig;
       'api::comparison-product-card-config.comparison-product-card-config': ApiComparisonProductCardConfigComparisonProductCardConfig;
       'api::comparison-uniq-text.comparison-uniq-text': ApiComparisonUniqTextComparisonUniqText;
+      'api::outdoor-activity-category.outdoor-activity-category': ApiOutdoorActivityCategoryOutdoorActivityCategory;
       'api::post.post': ApiPostPost;
       'api::ranking.ranking': ApiRankingRanking;
       'api::topic.topic': ApiTopicTopic;

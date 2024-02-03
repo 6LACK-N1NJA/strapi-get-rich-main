@@ -1,7 +1,8 @@
 {
   "collectionName": "components_comparison_components_filter_configs",
   "info": {
-    "displayName": "filterConfig"
+    "displayName": "filterConfig",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -9,6 +10,9 @@
       "type": "string"
     },
     "filterFieldName": {
+      "type": "string"
+    },
+    "filterValues": {
       "type": "string"
     }
   }
