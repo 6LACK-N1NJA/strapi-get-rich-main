@@ -874,6 +874,7 @@ export interface ApiComparisonComparison extends Schema.CollectionType {
       'manyToMany',
       'api::outdoor-activity-category.outdoor-activity-category'
     >;
+    csvData: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
