@@ -49,6 +49,13 @@
     },
     "snippet": {
       "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "knowledge",
+        "destination"
+      ]
     }
   }
 }

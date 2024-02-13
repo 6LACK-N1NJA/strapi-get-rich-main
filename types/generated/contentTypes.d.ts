@@ -805,6 +805,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'api::outdoor-activity-category.outdoor-activity-category'
     >;
     snippet: Attribute.Text;
+    type: Attribute.Enumeration<['knowledge', 'destination']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
